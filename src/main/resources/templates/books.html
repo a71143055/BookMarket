@@ -27,7 +27,7 @@
         <div class="col-md-4" th:each="book:${bookList}">
             <h3 th:text="${book.getName()}"></h3>
             <p th:text="${book.getAuthor()}"></p>
-            <p th:text="${book.getPublisher()} + '|' + ${book.releaseDate()}"></p>
+            <p th:text="${book.getPublisher()} + '|' + ${book.getReleaseDate()}"></p>
             <p align="left" th:text="${book.getDescription()}"></p>
             <p th:text="${book.getUnitPrice()}">원</p>
         </div>
