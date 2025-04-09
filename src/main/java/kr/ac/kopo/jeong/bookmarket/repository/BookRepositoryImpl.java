@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private List<Book> bookList = new ArrayList<>();
+    private List<Book> bookList = new ArrayList<Book>();
 
     public BookRepositoryImpl() {
         Book book1 = new Book();
@@ -61,5 +61,21 @@ public class BookRepositoryImpl implements BookRepository {
     @Override
     public List<Book> getAllBookList() {
         return bookList;
+    }
+
+    @Override
+    public Book getBookById(String bookId) {
+        Book bookInfo = null;
+        for (Book book : bookList) {
+            if (book != null && book.getBookId() != null && book.getBookId().equals(bookId)) {
+                bookInfo = book;
+                break;
+            }
+        }
+
+        if(bookInfo == null){
+            throw new IllegalArgumentException("도서번호가 " + bookId + "인 해당 도서를 찾을 수 없습니다.");
+        }
+        return bookInfo;
     }
 }
