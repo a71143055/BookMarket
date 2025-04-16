@@ -17,4 +17,8 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBookList() {
         return bookRepository.getAllBookList();
     }
+
+    public Book getBookById(String bookId) {
+        return bookRepository.getBookById(bookId);
+    }
 }

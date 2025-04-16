@@ -9,11 +9,10 @@ import java.util.List;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private List<Book> bookList = new ArrayList<Book>();
+    private List<Book> listOfBook = new ArrayList<Book>();
 
     public BookRepositoryImpl() {
         Book book1 = new Book();
-        bookList.add(book1);
         book1.setBookId("isbn0001");
         book1.setName("스프링부트완전정복");
         book1.setUnitPrice(BigDecimal.valueOf(35000));
@@ -25,10 +24,9 @@ public class BookRepositoryImpl implements BookRepository {
         book1.setReleaseDate("2024/12/31");
         book1.setCondition("신규도서");
 
-        bookList.add(book1);
+        listOfBook.add(book1);
 
         Book book2 = new Book();
-        bookList.add(book2);
         book2.setBookId("isbn0002");
         book2.setName("안드로이드플그래밍");
         book2.setUnitPrice(BigDecimal.valueOf(34000));
@@ -40,10 +38,9 @@ public class BookRepositoryImpl implements BookRepository {
         book2.setReleaseDate("2024/01/19");
         book2.setCondition("신규도서");
 
-        bookList.add(book2);
+        listOfBook.add(book2);
 
         Book book3 = new Book();
-        bookList.add(book3);
         book3.setBookId("isbn0003");
         book3.setName("혼공머딥");
         book3.setUnitPrice(BigDecimal.valueOf(25000));
@@ -55,18 +52,18 @@ public class BookRepositoryImpl implements BookRepository {
         book3.setReleaseDate("2020/12/21");
         book3.setCondition("신규도서");
 
-        bookList.add(book3);
+        listOfBook.add(book3);
     }
 
     @Override
     public List<Book> getAllBookList() {
-        return bookList;
+        return listOfBook;
     }
 
     @Override
     public Book getBookById(String bookId) {
         Book bookInfo = null;
-        for (Book book : bookList) {
+        for (Book book : listOfBook) {
             if (book != null && book.getBookId() != null && book.getBookId().equals(bookId)) {
                 bookInfo = book;
                 break;
