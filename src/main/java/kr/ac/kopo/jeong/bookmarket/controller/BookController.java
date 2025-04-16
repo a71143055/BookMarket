@@ -39,7 +39,7 @@ public class BookController {
     public String RequestBookById(@RequestParam("id") String bookId, Model model) {
         Book book = bookService.getBookById(bookId);
         model.addAttribute("book", book);
-        return "books";
+        return "book";
     }
 
     @GetMapping("/{category}")
