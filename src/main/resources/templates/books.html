@@ -30,7 +30,7 @@
             <p th:text="${book.getPublisher()} + '|' + ${book.getReleaseDate()}"></p>
             <p align="left" th:text="${book.getDescription()}"></p>
             <p th:text="${book.getUnitPrice()}">원</p>
-            <p><a th:href="'/BookMarket/books/book?id=' + ${Book.getBookId()}" class=" btn btn-Secondary" role="button">상세정보 &raquo;</a></p>
+            <p><a th:href="'/BookMarket/books/book?id=' + ${book.getBookId()}" class=" btn btn-Secondary" role="button">상세정보 &raquo;</a></p>
         </div>
     </div>
     <footer class="pt-3 mt-4 text-body-secondary border-top">
