@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WelcomeController {
     @RequestMapping(value="home", method = RequestMethod.GET)
     public String welcomeMethod() {
-        String welcomeHtml = "<!DOCTYPE html>\n" +
+
+        return "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
                 "    <meta charset=\"UTF-8\">\n" +
@@ -45,7 +46,5 @@ public class WelcomeController {
                 "</div>\n" +
                 "</body>\n" +
                 "</html>";
-
-        return welcomeHtml;
     }
 }

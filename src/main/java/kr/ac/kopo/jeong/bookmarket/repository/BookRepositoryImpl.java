@@ -9,10 +9,12 @@ import java.util.List;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private List<Book> listOfBook = new ArrayList<Book>();
+    private final List<Book> listOfBook = new ArrayList<Book>();
 
     public BookRepositoryImpl() {
+
         Book book1 = new Book();
+        listOfBook.add(book1);
         book1.setBookId("isbn0001");
         book1.setName("스프링부트완전정복");
         book1.setUnitPrice(BigDecimal.valueOf(35000));
@@ -27,6 +29,7 @@ public class BookRepositoryImpl implements BookRepository {
         listOfBook.add(book1);
 
         Book book2 = new Book();
+        listOfBook.add(book2);
         book2.setBookId("isbn0002");
         book2.setName("안드로이드플그래밍");
         book2.setUnitPrice(BigDecimal.valueOf(34000));
@@ -41,6 +44,7 @@ public class BookRepositoryImpl implements BookRepository {
         listOfBook.add(book2);
 
         Book book3 = new Book();
+        listOfBook.add(book3);
         book3.setBookId("isbn0003");
         book3.setName("혼공머딥");
         book3.setUnitPrice(BigDecimal.valueOf(25000));
