@@ -4,8 +4,7 @@ import kr.ac.kopo.jeong.bookmarket.domain.Book;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class BookRepositoryImpl implements BookRepository {
@@ -87,6 +86,31 @@ public class BookRepositoryImpl implements BookRepository {
                 bookByCategory.add(book);
             }
         }
+        return bookByCategory;
+    }
+
+    public Set<Book> getBookListByFilter(Map<String, List<String>> filter) {
+        Set<Book> bookByPublisher = new HashSet<Book>();
+        Set<Book> bookByCategory = new HashSet<Book>();
+        Set<String> bookByFilter = filter.keySet();
+        if(bookByFilter.contains("publisher")) {
+            for(int j = 0; j < filter.get("publisher").size(); j++) {
+                String publisher = filter.get("publisher").get(j);
+                for (Book book : listOfBook) {
+                    if (publisher.equalsIgnoreCase(book.getPublisher())) {
+                        bookByPublisher.add(book);
+                    }
+                }
+            }
+        }
+        if(bookByFilter.contains("category")) {
+            for (int i = 0; i < filter.get("category").size(); i++) {
+                String category = filter.get("category").get(i);
+                List<Book> list = getBookListByCategory(category);
+                bookByCategory.addAll(list);
+            }
+        }
+        bookByCategory.retainAll(bookByPublisher);
         return bookByCategory;
     }
 }
