@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,6 +39,13 @@ public class BookController {
     public String RequestBookById(@RequestParam("id") String bookId, Model model) {
         Book book = bookService.getBookById(bookId);
         model.addAttribute("book", book);
+        return "books";
+    }
+
+    @GetMapping("/{category}")
+    public String requestBookListByCategory(@PathVariable("category") String category, Model model) {
+        List<Book> bookByCategory = bookService.getBookListByCategory(category);
+        model.addAttribute("bookList", bookByCategory);
         return "books";
     }
 }
