@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ResourceConfig {
+public class ResourceConfig implements WebMvcConfigurer {
     @Value("${file.uploadDir}")
     String fileDir;
 
