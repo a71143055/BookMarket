@@ -1,17 +1,22 @@
 package kr.ac.kopo.jeong.bookmarket.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import kr.ac.kopo.jeong.bookmarket.domain.Book;
 import kr.ac.kopo.jeong.bookmarket.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -84,7 +89,20 @@ public class BookController {
         bookService.setNewBook(book);
         return "redirect:/books";
     }
-    
+
+    @GetMapping("/download")
+    public void downloadBookImage(@RequestParam("file") String paramKey, HttpServletResponse response) throws IOException {
+        File imageFile = new File(fileDir + paramKey);
+        response.setContentType("application/download");
+        response.setContentLength((int) imageFile.length());
+        response.setHeader("Contetnt-disposition", "attachment;filename=\"" + paramKey + "\"");
+        OutputStream os = response.getOutputStream();
+        FileInputStream fis = new FileInputStream(imageFile);
+        FileCopyUtils.copy(fis, os);
+        fis.close();
+        os.close();
+    }
+
     @ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("addTitle","신규 도서 등록");
