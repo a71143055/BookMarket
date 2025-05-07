@@ -20,4 +20,5 @@ public class Book {
     private long unitsInStock;
     private String releaseDate;
     private String condition;
+    private String fileName;
 }
