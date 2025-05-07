@@ -1,15 +1,11 @@
 package kr.ac.kopo.jeong.bookmarket.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Book {
     private String bookId;
     private String name;

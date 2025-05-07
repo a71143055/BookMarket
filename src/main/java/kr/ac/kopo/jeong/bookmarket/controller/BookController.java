@@ -84,9 +84,14 @@ public class BookController {
         bookService.setNewBook(book);
         return "redirect:/books";
     }
+    
+    @ModelAttribute
+    public void addAttributes(Model model) {
+        model.addAttribute("addTitle","신규 도서 등록");
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setAllowedFields("bookId", "bookName","bookAuthor","bookPrice","bookCategory","bookImage");
+        binder.setAllowedFields("bookId", "name", "unitPrice", "author", "description", "publisher", "category", "unitsInStock", "totalPages", "releaseDate", "condition", "bookImage");
     }
 }
