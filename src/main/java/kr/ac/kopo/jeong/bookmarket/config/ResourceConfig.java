@@ -12,6 +12,9 @@ public class ResourceConfig {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/BookMarket/images/**").addResourceLocations("file://"+fileDir).setCachePeriod(60*60*24*365);
+        registry
+        .addResourceHandler("/BookMarket/images/**")
+        .addResourceLocations("file://"+fileDir)
+        .setCachePeriod(60*60*24*365);
     }
 }
