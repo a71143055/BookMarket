@@ -3,18 +3,26 @@ package kr.ac.kopo.jeong.bookmarket.controller;
 import kr.ac.kopo.jeong.bookmarket.domain.Book;
 import kr.ac.kopo.jeong.bookmarket.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/books")
 public class BookController {
+    @Value("${file.uploadDir}")
+    String fileDir;
+
     @Autowired
     private BookService bookService;
 
@@ -53,5 +61,32 @@ public class BookController {
         Set<Book> booksByFilter = bookService.getBookListByFilter(bookFilter);
         model.addAttribute("bookList", booksByFilter);
         return "books";
+    }
+
+    @GetMapping("/add")
+    public String requestAddBookForm() {
+        return "addBook";
+    }
+
+    @PostMapping("/add")
+    public String submitAddNewBook(@ModelAttribute Book book) {
+        MultipartFile bookImage = book.getBookImage();
+        String saveName = bookImage.getOriginalFilename();
+        File saveFile = new File(fileDir, Objects.requireNonNull(saveName));
+        if (!bookImage.isEmpty()) {
+            try {
+                bookImage.transferTo(saveFile);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        book.setFileName(saveName);
+        bookService.setNewBook(book);
+        return "redirect:/books";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setAllowedFields("bookId", "bookName","bookAuthor","bookPrice","bookCategory","bookImage");
     }
 }

@@ -3,6 +3,7 @@ package kr.ac.kopo.jeong.bookmarket.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
@@ -21,4 +22,5 @@ public class Book {
     private String releaseDate;
     private String condition;
     private String fileName;
+    private MultipartFile bookImage;
 }

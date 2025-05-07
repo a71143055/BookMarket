@@ -79,6 +79,10 @@ public class BookRepositoryImpl implements BookRepository {
         return bookInfo;
     }
 
+    public void setNewBook(Book book) {
+        listOfBook.add(book);
+    }
+
     public List<Book> getBookListByCategory(String category) {
         List<Book> bookByCategory = new ArrayList<Book>();
         for (Book book : listOfBook) {
