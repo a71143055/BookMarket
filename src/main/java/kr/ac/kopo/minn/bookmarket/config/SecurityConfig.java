@@ -47,7 +47,12 @@ public class SecurityConfig {
                 .failureUrl("/loginfailed")
                 .usernameParameter("username")
                 .passwordParameter("password")
-        );
+        )
+                .logout (
+        logout->logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                );
         return http.build();
     }
 }

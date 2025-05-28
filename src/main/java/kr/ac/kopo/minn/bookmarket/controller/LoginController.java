@@ -15,4 +15,8 @@ public class LoginController {
         model.addAttribute("error", true);
         return "login";
     }
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        return "login";
+    }
 }
