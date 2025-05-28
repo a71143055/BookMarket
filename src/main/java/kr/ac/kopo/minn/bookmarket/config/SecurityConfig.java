@@ -39,7 +39,14 @@ public class SecurityConfig {
                 .requestMatchers("/books/add").hasRole("ADMIN")
                 .anyRequest().permitAll()
         )
-        .formLogin(Customizer.withDefaults());
+        .formLogin(
+                formLogin->formLogin
+                .loginPage("/login")
+                .defaultSuccessUrl("/books/add")
+                .failureUrl("/loginfailed")
+                .usernameParameter("username")
+                .passwordParameter("password")
+        );
         return http.build();
     }
 }
