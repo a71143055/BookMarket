@@ -42,6 +42,7 @@ public class SecurityConfig {
         .formLogin(
                 formLogin->formLogin
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/books/add")
                 .failureUrl("/loginfailed")
                 .usernameParameter("username")
