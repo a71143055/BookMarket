@@ -33,6 +33,13 @@
         </div>
 
         <div class="row align-items-md-stretch">
+            <div class="text-end" style="padding-right:30px">
+                <form action="/BookMarket/logout" method="POST">
+                    <a href="?lang=ko" style="text-decoration-line:none">Korean</a>|
+                    <a href="?lang=en" style="text-decoration-line:none">English</a>
+                    <input type="submit" class="btn btn-sm btn-success" value="Logout"/>
+                </form>
+            </div>
             <form action="/BookMarket/books/add" method="post" enctype="multipart/form-data" th:object="${book}">
                 <legend th:text="${addTitle}"></legend>
                 <div class="mb-3 row">
