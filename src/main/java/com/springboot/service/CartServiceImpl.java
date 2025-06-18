@@ -15,4 +15,7 @@ public class CartServiceImpl  implements CartService {
     public Cart read(String cartId) {
         return cartRepository.read(cartId);
     }
+    public void update(String cartId, Cart cart) {
+        cartRepository.update(cartId, cart);
+    }
 }

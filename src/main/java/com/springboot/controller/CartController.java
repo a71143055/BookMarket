@@ -1,9 +1,14 @@
 package com.springboot.controller;
 
+import com.springboot.domain.Book;
 import com.springboot.domain.Cart;
+import com.springboot.domain.CartItem;
+import com.springboot.exception.BookIdException;
+import com.springboot.service.BookService;
 import com.springboot.service.CartService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
     @Autowired
     private CartService cartService;
+    @Autowired
+    private BookService bookService;
     @GetMapping
     public String requestCartId(HttpServletRequest request) {
         System.out.println("aaaa");
@@ -36,4 +43,16 @@ public class CartController {
         System.out.println("dddd");
         return cartService.read(cartId);
     }
+    @PutMapping("book/{bookId}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void addCartByNewItem(@PathVariable("bookId") String bookId, HttpServletRequest request) {
+        String sessionid = request.getSession(true).getId();
+        Cart cart = cartService.read(sessionid);
+        if (cart == null) cart = cartService.create(new Cart(sessionid));
+        Book book = bookService.getBookById(bookId);
+        if  (book == null) throw new IllegalArgumentException(new BookIdException(bookId));
+        cart.addCartItem(new CartItem(book));
+        cartService.update(sessionid, cart);
+    }
+
 }

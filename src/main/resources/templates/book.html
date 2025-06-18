@@ -41,6 +41,12 @@
 				<p><b>재고수</b> : <span th:text ="${book.unitsInStock}">
 				<h4 th:text ="${book.unitPrice}+'원'"></h4>
 				<br>
+				<form name="addForm" id="addForm" method="post">
+					<input type="hidden"name="_method" value="put"/>
+					<p><a th:href="'javascript:addToCart(${book.bookId}+)'" class="btn btn-primary">도서주문 &raquo;</a>
+					<a href="/BookMarket/cart" class="btn btn-warning">장바구니 &raquo;>
+					<a href="/BookMarket/books" class="btn btn-secondary">도서 목록 &raquo;</a>
+				</form>
 			<p><a href="#" class="btn btn-primary">도서주문 &raquo;</a>
 			<a href="/BookMarket/cart" class="btn-warning">장바구니 &raquo;</a>
 			<a href="/BookMarket/books" class="btn btn-secondary">도서 목록 &raquo;</a>

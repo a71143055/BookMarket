@@ -21,4 +21,21 @@ public class Cart {
         this();
         this.cartId = cartId;
     }
+
+    public void addCartItem(CartItem item) {
+        String bookId = item.getBook().getBookId();
+        if(cartItems.containsKey(bookId)) {
+            CartItem cartItem = cartItems.get(bookId);
+            cartItem.setQuantity(cartItem.getQuantity() + item.getQuantity());
+            cartItems.put(bookId, cartItem);
+        } else {
+            cartItems.put(bookId, item);
+        }
+        item.updateTotalPrice();
+    }
+    public void removeCartItem(CartItem item) {
+        String bookId = item.getBook().getBookId();
+        cartItems.remove(bookId);
+        item.updateTotalPrice();
+    }
 }
