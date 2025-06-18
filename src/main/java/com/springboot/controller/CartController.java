@@ -54,5 +54,16 @@ public class CartController {
         cart.addCartItem(new CartItem(book));
         cartService.update(sessionid, cart);
     }
+    @DeleteMapping("/book/{bookId}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void removeCartByItem(@PathVariable("bookId") String bookId, HttpServletRequest request) {
+        String sessionid = request.getSession(true).getId();
+        Cart cart = cartService.read(sessionid);
+        if (cart == null) cart = cartService.create(new Cart(sessionid));
+        Book book = bookService.getBookById(bookId);
+        if (book == null) throw new IllegalArgumentException(new BookIdException(bookId));
+        cart.removeCartItem(new CartItem(book));
+        cartService.update(sessionid, cart);
+    }
 
 }

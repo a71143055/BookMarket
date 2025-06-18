@@ -4,3 +4,8 @@ function addToCart(bookid) {
         document.addForm.submit();
     }
 }
+function removeFromCart(bookid, cartId) {
+    document.removeForm.action="/BookMarket/cat/book/"+bookid;
+    document.removeForm.submit();
+    setTimeout('location.reload()',10);
+}
