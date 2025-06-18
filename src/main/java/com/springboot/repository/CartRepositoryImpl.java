@@ -23,7 +23,7 @@ public class CartRepositoryImpl implements CartRepository {
         return listOfCarts.get(cartId);
     }
     public void update(String cartId, Cart cart) {
-        if(!listOfCarts.keySet().contains(cartId)) {
+        if(!listOfCarts.containsKey(cartId)) {
             throw new IllegalArgumentException(String.format("장바구니 목록을 갱신할 수 없습니다. 장바구니 id(%)가 존재하지 않습니다.",cartId));
         }
         listOfCarts.put(cartId, cart);

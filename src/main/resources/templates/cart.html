@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>장바구니</title>
     <link href="/BookMarket/css/bootstrap.css" rel="stylesheet">
+    <script src="BookMarket/js/controllers.js"></script>
 </head>
 <body>
 <div class="container py-4">
@@ -37,6 +38,8 @@
                 <th>비고</th>
                 <th></th>
             </tr>
+            <from name="removeForm" id="removeForm" method="post">
+            <input type="hidden" name="method" value="delete"/>
             <div th:if="${cart != null}">
                 <div th:each="item:${cart.cartItems}">
                     <tr>
@@ -45,7 +48,7 @@
                         <td th:text="${item.value.book.unitPrice}"></td>
                         <td th:text="${item.value.quantity}"></td>
                         <td th:text="${item.value.totalPrice}"></td>
-                        <td></td>
+                        <td><a th;href="'jaavscript:removeFromCart(+${item.value.book.bookId}'''+${cartId} +'"><span class="badge text-bg-danger" th:text="삭제"></span></a></td>
                     </tr>
                 </div>
             </div>
