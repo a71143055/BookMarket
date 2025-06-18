@@ -42,7 +42,7 @@
                 <th>비고</th>
                 <th></th>
             </tr>
-            <from name="removeForm" id="removeForm" method="post">
+            <from name="removeForm" id="removeForm" method="post"></from>
             <input type="hidden" name="method" value="delete"/>
             <div th:if="${cart != null}">
                 <div th:each="item:${cart.cartItems}">
