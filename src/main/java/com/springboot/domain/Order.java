@@ -2,8 +2,6 @@ package com.springboot.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +9,7 @@ import java.util.Map;
 @Entity
 @Table(name = "orders")
 @Data
-public class Order implements Serializable {
+public class Order {
     @Id @GeneratedValue
     private Long orderId;
     @OneToOne(cascade = CascadeType.ALL)
@@ -23,5 +21,5 @@ public class Order implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name="order_order_id")
     private Map<String,OrderItem> orderItems = new HashMap<>();
-    private BigDecimal totalPrice;
+    private BigDecimal grandTotal;
 }
