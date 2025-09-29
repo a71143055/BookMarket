@@ -3,6 +3,8 @@ package com.springboot.controller;
 import com.springboot.domain.*;
 import com.springboot.service.CartService;
 import com.springboot.service.OrderService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,5 +77,24 @@ public class OrderController {
         model.addAttribute("order", order);
         orderService.saveOrder(order);
         return "redirect:/order/orderFinished";
+    }
+    @GetMapping("/orderFinished")
+    public String requestFinished(HttpServletRequest request, Model model) {
+        Long orderId = orderService.saveOrder(order);
+        order.setOrderId(orderId);
+        model.addAttribute("order", order);
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
+        return "orderFinished";
+    }
+    @GetMapping("orderCancelled")
+    public String requestCancelled(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if(session != null) {
+            session.invalidate();
+        }
+        return "orderCancelled";
     }
 }
