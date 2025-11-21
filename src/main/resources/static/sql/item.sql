@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS item(
 	b_releaseDate VARCHAR(20),
 	b_condition VARCHAR(20),
 	b_fileName  VARCHAR(20),
-	PRIMARY KEY (b_bookId)
+	PRIMARY KEY (b_itemId)
 )DEFAULT CHARSET=utf8;
 
